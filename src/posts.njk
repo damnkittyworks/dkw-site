@@ -12,16 +12,19 @@ description: Posts that evolve and improve over time.
 </section>
 
 <section>
+  {% set sortedPosts = collections.posts | sortPostsByLastUpdated(gitHistory) %}
   {% if collections.posts | length %}
     <ul class="stack-list">
-      {% for post in collections.posts %}
+      {% for post in sortedPosts %}
+        {% set updatedAt = post | postLastUpdated(gitHistory) %}
+        {% set revisions = post | postRevisions(gitHistory) %}
         <li class="card">
           <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-          <p>{{ post.data.excerpt or "No excerpt yet." }}</p>
+          <p>{{ post | postSnippet(100) or "No excerpt yet." }}</p>
           <p class="meta-inline">
             Published {{ post.date | prettyDate }} |
-            Last updated {{ (post.data.lastUpdated or post.date) | prettyDate }} |
-            Revisions {{ post.data.revisionCount or 1 }}
+            Last updated {{ updatedAt | prettyDate }} |
+            {{ revisions }} revision{% if revisions != 1 %}s{% endif %}
           </p>
         </li>
       {% endfor %}

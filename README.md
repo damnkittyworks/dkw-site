@@ -35,7 +35,8 @@ Production output is written to `_site/`, which works directly with Cloudflare P
 - Build command: `git fetch --unshallow && npm run build`
 - Build output directory: `_site`
 
-The `git fetch --unshallow` step prepares the repo for future git-history-powered post metadata.
+The `git fetch --unshallow` step is required for accurate Living Posts revision counts
+and changelog history. A shallow clone can hide older commits.
 
 ## Project structure
 
@@ -44,4 +45,15 @@ The `git fetch --unshallow` step prepares the repo for future git-history-powere
 - `src/builds/` Build Log source notes/placeholders
 - `src/_includes/` shared templates/layouts
 - `src/_data/` global data
-- `scripts/fetch-git-history.js` future git metadata generator (stub)
+- `scripts/fetch-git-history.js` build-time local git metadata generator
+
+## Git-powered Living Posts metadata
+
+During `npm run build` and `npm run start`, the script
+`scripts/fetch-git-history.js` runs before Eleventy to generate:
+
+- `src/_data/gitHistory.json`
+
+It uses local git history only (`git log --follow`) and does not call the GitHub API.
+If git metadata is unavailable (for example, not a git repo), the script writes safe
+fallback output so builds still succeed.

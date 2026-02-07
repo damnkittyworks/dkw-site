@@ -30,14 +30,17 @@ description: Living posts and build logs from Damn Kitty Works.
 
 <section class="card">
   <h2>Latest Thinking</h2>
+  {% set sortedPosts = collections.posts | sortPostsByLastUpdated(gitHistory) %}
   {% if collections.posts | length %}
     <ul class="clean-list">
-      {% for post in collections.posts %}
+      {% for post in sortedPosts %}
         {% if loop.index <= 3 %}
+          {% set updatedAt = post | postLastUpdated(gitHistory) %}
+          {% set revisions = post | postRevisions(gitHistory) %}
           <li>
             <a href="{{ post.url }}">{{ post.data.title }}</a>
             <p class="meta-inline">
-              {{ (post.data.lastUpdated or post.date) | prettyDate }}
+              Updated {{ updatedAt | prettyDate }} · {{ revisions }} revision{% if revisions != 1 %}s{% endif %}
             </p>
           </li>
         {% endif %}
