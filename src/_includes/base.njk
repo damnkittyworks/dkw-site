@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
+    <meta name="description" content="{{ description or site.tagline }}">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    {% include "header.njk" %}
+    <main id="content" class="site-main site-container">
+      {{ content | safe }}
+    </main>
+    {% include "footer.njk" %}
+  </body>
+</html>

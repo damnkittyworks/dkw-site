@@ -1,0 +1,39 @@
+---
+layout: base.njk
+---
+{% set displayedRevisionCount = revisionCount or 1 %}
+{% set timelineEntries = changelog or [{
+  "version": "v0.1",
+  "date": (lastUpdated or date),
+  "message": "Initial draft published.",
+  "link": "#"
+}] %}
+
+<article class="post-entry">
+  <header class="post-header card">
+    <h1>{{ title }}</h1>
+    <p class="meta-inline">
+      Published {{ date | prettyDate }} |
+      Last updated {{ (lastUpdated or date) | prettyDate }} |
+      Revisions {{ displayedRevisionCount }}
+    </p>
+  </header>
+
+  <div class="post-content card">
+    {{ content | safe }}
+  </div>
+
+  <section class="post-changelog card" aria-labelledby="changelog-title">
+    <h2 id="changelog-title">Changelog</h2>
+    <ol class="timeline">
+      {% for entry in timelineEntries %}
+        <li class="timeline-entry">
+          <p class="timeline-version">{{ entry.version }}</p>
+          <p class="timeline-date">{{ entry.date | prettyDate }}</p>
+          <p class="timeline-message">{{ entry.message }}</p>
+          <a class="timeline-link" href="{{ entry.link or '#' }}">View changes</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+</article>

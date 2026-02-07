@@ -1,0 +1,49 @@
+---
+layout: base.njk
+title: Home
+description: Living posts and build logs from Damn Kitty Works.
+---
+<section class="hero card">
+  <h1>Damn Kitty Works is where ideas stay alive after publish.</h1>
+  <p>
+    Living Posts are not static essays. They evolve with each revision, each lesson,
+    and each project milestone so readers can follow the real shape of the work.
+  </p>
+  <p>
+    Build logs track what ships, what changes, and what gets parked so nothing is
+    hidden behind polished hindsight.
+  </p>
+  <p><a class="cta-link" href="/posts/">Read the latest -></a></p>
+</section>
+
+<section class="card">
+  <h2>What I'm Building Now</h2>
+  <article class="feature-block">
+    <h3>Living Posts Engine</h3>
+    <p>
+      A publishing workflow where long-form posts evolve over time with clear revisions,
+      changelog context, and tighter feedback loops.
+    </p>
+    <p><a href="/builds/">Follow the build log</a></p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Latest Thinking</h2>
+  {% if collections.posts | length %}
+    <ul class="clean-list">
+      {% for post in collections.posts %}
+        {% if loop.index <= 3 %}
+          <li>
+            <a href="{{ post.url }}">{{ post.data.title }}</a>
+            <p class="meta-inline">
+              {{ (post.data.lastUpdated or post.date) | prettyDate }}
+            </p>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No posts yet. Check back soon.</p>
+  {% endif %}
+</section>

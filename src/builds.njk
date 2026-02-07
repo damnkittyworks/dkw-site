@@ -1,0 +1,46 @@
+---
+layout: base.njk
+title: Build Log
+description: Current and shipped projects from Damn Kitty Works.
+---
+{% set buildProjects = [
+  {
+    "name": "Living Posts Engine",
+    "status": "ACTIVE",
+    "summary": "Creating an iteration-friendly writing workflow with revision metadata and changelog surfacing.",
+    "updated": "2026-02-07"
+  },
+  {
+    "name": "Cloudflare Pages Launch",
+    "status": "SHIPPED",
+    "summary": "Deploy pipeline, DNS routing, and static publish setup for fast and reliable delivery.",
+    "updated": "2026-01-30"
+  },
+  {
+    "name": "Archive Microsite Concept",
+    "status": "PARKED",
+    "summary": "Early exploration of a standalone archive experience for long-term project documentation.",
+    "updated": "2025-12-14"
+  }
+] %}
+
+<section class="card">
+  <h1>Build Log</h1>
+  <p>
+    A running log of active experiments, recently shipped projects, and parked ideas
+    that may come back later.
+  </p>
+</section>
+
+<section class="stack-list">
+  {% for project in buildProjects %}
+    <article class="card build-card {% if project.status == 'ACTIVE' %}build-card-active{% endif %}">
+      <header class="build-card-header">
+        <h2>{{ project.name }}</h2>
+        <span class="status-badge status-{{ project.status | lower }}">{{ project.status }}</span>
+      </header>
+      <p>{{ project.summary }}</p>
+      <p class="meta-inline">Last touched {{ project.updated | prettyDate }}</p>
+    </article>
+  {% endfor %}
+</section>

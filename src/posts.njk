@@ -1,0 +1,32 @@
+---
+layout: base.njk
+title: Living Posts
+description: Posts that evolve and improve over time.
+---
+<section class="card">
+  <h1>Living Posts</h1>
+  <p>
+    These posts are intentionally alive. They grow through revisions, updates, and
+    new context as the work evolves.
+  </p>
+</section>
+
+<section>
+  {% if collections.posts | length %}
+    <ul class="stack-list">
+      {% for post in collections.posts %}
+        <li class="card">
+          <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          <p>{{ post.data.excerpt or "No excerpt yet." }}</p>
+          <p class="meta-inline">
+            Published {{ post.date | prettyDate }} |
+            Last updated {{ (post.data.lastUpdated or post.date) | prettyDate }} |
+            Revisions {{ post.data.revisionCount or 1 }}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No living posts yet.</p>
+  {% endif %}
+</section>
