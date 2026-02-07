@@ -9,3 +9,6 @@ Living Posts are designed to change over time in public.
 
 Each revision captures a small step forward so the post reflects what is true now,
 not just what was true on day one.
+
+This also means readers can scan the changelog and quickly see what changed
+without rereading the entire essay.
