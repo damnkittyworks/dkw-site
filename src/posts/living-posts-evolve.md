@@ -12,3 +12,5 @@ not just what was true on day one.
 
 This also means readers can scan the changelog and quickly see what changed
 without rereading the entire essay.
+
+In v1, each changelog entry links straight to the underlying git commit for full context.
