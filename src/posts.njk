@@ -6,19 +6,20 @@ description: Posts that evolve and improve over time.
 <section class="card">
   <h1>Living Posts</h1>
   <p>
-    These posts are intentionally alive. They grow through revisions, updates, and
-    new context as the work evolves.
+    These aren't finished articles. They're ideas I keep updating as I learn.
+    Every edit is tracked, so you can see exactly what changed and when.
+    Think of it as thinking out loud, with receipts.
   </p>
 </section>
 
 <section>
   {% set sortedPosts = collections.posts | sortPostsByLastUpdated(gitHistory) %}
   {% if collections.posts | length %}
-    <ul class="stack-list">
+    <ul class="post-list clean-list">
       {% for post in sortedPosts %}
         {% set updatedAt = post | postLastUpdated(gitHistory) %}
         {% set revisions = post | postRevisions(gitHistory) %}
-        <li class="card">
+        <li class="post-list-item">
           <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
           <p>{{ post | postSnippet(100) or "No excerpt yet." }}</p>
           <p class="meta-inline">

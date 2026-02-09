@@ -5,30 +5,30 @@ description: Current and shipped projects from Damn Kitty Works.
 ---
 {% set buildProjects = [
   {
-    "name": "Living Posts Engine",
+    "name": "Living Posts Workflow",
     "status": "ACTIVE",
-    "summary": "Creating an iteration-friendly writing workflow with revision metadata and changelog surfacing.",
-    "updated": "2026-02-07"
+    "summary": "Why it matters: publishing becomes learnable, not mysterious.",
+    "updated": "2026-02-07",
+    "links": {
+      "postSlug": "living-posts-workflow"
+    }
   },
   {
     "name": "Cloudflare Pages Launch",
     "status": "SHIPPED",
-    "summary": "Deploy pipeline, DNS routing, and static publish setup for fast and reliable delivery.",
-    "updated": "2026-01-30"
-  },
-  {
-    "name": "Archive Microsite Concept",
-    "status": "PARKED",
-    "summary": "Early exploration of a standalone archive experience for long-term project documentation.",
-    "updated": "2025-12-14"
+    "summary": "Why it matters: fast, reliable site updates without drama.",
+    "updated": "2026-01-30",
+    "links": {
+      "postSlug": "cloudflare-pages-launch"
+    }
   }
 ] %}
 
 <section class="card">
   <h1>Build Log</h1>
   <p>
-    A running log of active experiments, recently shipped projects, and parked ideas
-    that may come back later.
+    What I'm making. Shipped, in progress, and parked.
+    No vaporware, if it's here, I've touched it.
   </p>
 </section>
 
@@ -41,6 +41,10 @@ description: Current and shipped projects from Damn Kitty Works.
       </header>
       <p>{{ project.summary }}</p>
       <p class="meta-inline">Last touched {{ project.updated | prettyDate }}</p>
+      {% set livingPostUrl = collections.posts | postUrlBySlug(project.links.postSlug) %}
+      {% if livingPostUrl %}
+        <p class="meta-inline build-links"><a href="{{ livingPostUrl }}">Read the living post →</a></p>
+      {% endif %}
     </article>
   {% endfor %}
 </section>

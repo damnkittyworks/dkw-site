@@ -145,13 +145,14 @@ module.exports = function (eleventyConfig) {
     markdownIt({
       html: false,
       linkify: true,
-      typographer: true,
+      typographer: false,
     })
   );
 
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
       .getFilteredByGlob("src/posts/*.md")
+      .filter((item) => !(item.data && item.data.draft))
       .sort((a, b) => b.date - a.date);
   });
 
@@ -217,6 +218,19 @@ module.exports = function (eleventyConfig) {
     }
 
     return `${source.slice(0, Math.max(0, limit - 1)).trimEnd()}...`;
+  });
+
+  eleventyConfig.addFilter("postUrlBySlug", (posts, slug) => {
+    if (!Array.isArray(posts) || !slug) {
+      return null;
+    }
+
+    const match = posts.find((post) => {
+      const postSlug = getSlugFromPostLike(post);
+      return postSlug === slug;
+    });
+
+    return match ? match.url : null;
   });
 
   return {

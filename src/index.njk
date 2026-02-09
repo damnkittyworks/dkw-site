@@ -4,41 +4,58 @@ title: Home
 description: Living posts and build logs from Damn Kitty Works.
 ---
 <section class="hero card">
-  <h1>Damn Kitty Works is where ideas stay alive after publish.</h1>
-  <p>
-    Living Posts are not static essays. They evolve with each revision, each lesson,
-    and each project milestone so readers can follow the real shape of the work.
+  <h1>I’m making AI feel usable.</h1>
+  <p class="hero-tagline">
+    Tiny demos, living posts, and simple workflows, with receipts, revisions,
+    and the occasional public faceplant.
   </p>
+  <hr class="hero-divider">
   <p>
-    Build logs track what ships, what changes, and what gets parked so nothing is
-    hidden behind polished hindsight.
+    Not a polished blog. Posts evolve in public. Every edit stays visible. That’s the point.
   </p>
-  <p><a class="cta-link" href="/posts/">Read the latest -></a></p>
+  <p><a class="cta-link cta-button" href="/posts/">Read the latest →</a></p>
 </section>
 
 <section class="card">
+  {% set nowProjects = [
+    {
+      "name": "Living Posts Workflow",
+      "status": "ACTIVE",
+      "summary": "A publishing workflow where long-form posts evolve over time with clear revisions and changelog context.",
+      "updated": "2026-02-07"
+    },
+    {
+      "name": "Cloudflare Pages Launch",
+      "status": "SHIPPED",
+      "summary": "Deploy pipeline, DNS routing, and static publish setup for fast and reliable delivery.",
+      "updated": "2026-01-30"
+    }
+  ] %}
+  {% set featuredProject = nowProjects[0] %}
   <h2>What I'm Building Now</h2>
-  <article class="feature-block">
-    <h3>Living Posts Engine</h3>
-    <p>
-      A publishing workflow where long-form posts evolve over time with clear revisions,
-      changelog context, and tighter feedback loops.
+  <article class="feature-block build-card build-card-active">
+    <p class="meta-inline">
+      <span class="status-badge status-{{ featuredProject.status | lower }}">{{ featuredProject.status }}</span>
+      Last updated {{ featuredProject.updated | prettyDate }}
     </p>
+    <h3>{{ featuredProject.name }}</h3>
+    <p>{{ featuredProject.summary }}</p>
     <p><a href="/builds/">Follow the build log</a></p>
   </article>
 </section>
 
-<section class="card">
+<section class="latest-thinking">
   <h2>Latest Thinking</h2>
   {% set sortedPosts = collections.posts | sortPostsByLastUpdated(gitHistory) %}
   {% if collections.posts | length %}
-    <ul class="clean-list">
+    <ul class="thinking-list clean-list">
       {% for post in sortedPosts %}
         {% if loop.index <= 3 %}
           {% set updatedAt = post | postLastUpdated(gitHistory) %}
           {% set revisions = post | postRevisions(gitHistory) %}
           <li>
             <a href="{{ post.url }}">{{ post.data.title }}</a>
+            <p>{{ post | postSnippet(100) }}</p>
             <p class="meta-inline">
               Updated {{ updatedAt | prettyDate }} · {{ revisions }} revision{% if revisions != 1 %}s{% endif %}
             </p>

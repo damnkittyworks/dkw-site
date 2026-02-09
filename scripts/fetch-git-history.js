@@ -98,7 +98,12 @@ function getSlugForFile(absolutePath, fileName) {
 
     const permalinkMatch = frontMatter.match(/^permalink:\s*["']?([^"'\n]+)["']?\s*$/m);
     if (permalinkMatch && permalinkMatch[1]) {
-      const clean = permalinkMatch[1].trim().replace(/^\/+|\/+$/g, "");
+      const rawPermalink = permalinkMatch[1].trim();
+      if (/^(false|true)$/i.test(rawPermalink)) {
+        return fallback;
+      }
+
+      const clean = rawPermalink.replace(/^\/+|\/+$/g, "");
       if (clean) {
         const segments = clean.split("/");
         return segments[segments.length - 1] || fallback;

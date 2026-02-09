@@ -2,7 +2,9 @@
 layout: post.njk
 title: Hello World
 excerpt: A starting point for the Living Posts format and revision-driven writing.
-date: 2026-02-07
+draft: true
+hideHistory: true
+permalink: false
 ---
 
 Welcome to the first Living Post on Damn Kitty Works.
