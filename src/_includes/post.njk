@@ -1,0 +1,52 @@
+---
+layout: base.njk
+---
+{% set history = page | historyForPost(gitHistory) %}
+{% set displayedRevisionCount = page | postRevisions(gitHistory) %}
+{% set updatedAt = page | postLastUpdated(gitHistory) %}
+{% set timelineEntries = (history and history.commits) or [] %}
+{% set suppressHistoryMeta = draft or hideHistory %}
+
+<article class="post-entry">
+  <header class="post-header card">
+    <h1>{{ title }}</h1>
+    {% if not suppressHistoryMeta %}
+      <p class="meta-inline">
+        Published {{ date | prettyDate }} |
+        Last updated {{ updatedAt | prettyDate }} |
+        {{ displayedRevisionCount }} revision{% if displayedRevisionCount != 1 %}s{% endif %}
+      </p>
+    {% endif %}
+  </header>
+
+  <div class="post-content card">
+    {{ content | safe }}
+  </div>
+
+  {% if not suppressHistoryMeta %}
+    <section class="post-changelog card" aria-labelledby="changelog-title">
+      <h2 id="changelog-title">Changelog</h2>
+      <ol class="timeline">
+        {% if timelineEntries | length %}
+          {% for commit in timelineEntries %}
+            {% set versionLabel = displayedRevisionCount - loop.index0 %}
+            <li class="timeline-entry">
+              <p class="timeline-version"><span class="version-pill">v{{ versionLabel }}</span></p>
+              <p class="timeline-date">{{ commit.date | prettyDate }}</p>
+              <p class="timeline-message"><em>{{ commit.message | escape }}</em></p>
+              {% if commit.url %}
+                <a class="timeline-link" href="{{ commit.url }}" target="_blank" rel="noopener noreferrer">View changes</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="timeline-entry">
+            <p class="timeline-version"><span class="version-pill">v1</span></p>
+            <p class="timeline-date">{{ date | prettyDate }}</p>
+            <p class="timeline-message"><em>Initial publication. Git changelog will appear after commits are available.</em></p>
+          </li>
+        {% endif %}
+      </ol>
+    </section>
+  {% endif %}
+</article>

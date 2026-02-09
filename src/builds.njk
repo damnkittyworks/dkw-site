@@ -1,0 +1,50 @@
+---
+layout: base.njk
+title: Build Log
+description: Current and shipped projects from Damn Kitty Works.
+---
+{% set buildProjects = [
+  {
+    "name": "Living Posts Workflow",
+    "status": "ACTIVE",
+    "summary": "Why it matters: publishing becomes learnable, not mysterious.",
+    "updated": "2026-02-07",
+    "links": {
+      "postSlug": "living-posts-workflow"
+    }
+  },
+  {
+    "name": "Cloudflare Pages Launch",
+    "status": "SHIPPED",
+    "summary": "Why it matters: fast, reliable site updates without drama.",
+    "updated": "2026-01-30",
+    "links": {
+      "postSlug": "cloudflare-pages-launch"
+    }
+  }
+] %}
+
+<section class="card">
+  <h1>Build Log</h1>
+  <p>
+    What I'm making. Shipped, in progress, and parked.
+    No vaporware, if it's here, I've touched it.
+  </p>
+</section>
+
+<section class="stack-list">
+  {% for project in buildProjects %}
+    <article class="card build-card {% if project.status == 'ACTIVE' %}build-card-active{% endif %}">
+      <header class="build-card-header">
+        <h2>{{ project.name }}</h2>
+        <span class="status-badge status-{{ project.status | lower }}">{{ project.status }}</span>
+      </header>
+      <p>{{ project.summary }}</p>
+      <p class="meta-inline">Last touched {{ project.updated | prettyDate }}</p>
+      {% set livingPostUrl = collections.posts | postUrlBySlug(project.links.postSlug) %}
+      {% if livingPostUrl %}
+        <p class="meta-inline build-links"><a href="{{ livingPostUrl }}">Read the living post →</a></p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>

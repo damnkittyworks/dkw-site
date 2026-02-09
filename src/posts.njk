@@ -1,0 +1,36 @@
+---
+layout: base.njk
+title: Living Posts
+description: Posts that evolve and improve over time.
+---
+<section class="card">
+  <h1>Living Posts</h1>
+  <p>
+    These aren't finished articles. They're ideas I keep updating as I learn.
+    Every edit is tracked, so you can see exactly what changed and when.
+    Think of it as thinking out loud, with receipts.
+  </p>
+</section>
+
+<section>
+  {% set sortedPosts = collections.posts | sortPostsByLastUpdated(gitHistory) %}
+  {% if collections.posts | length %}
+    <ul class="post-list clean-list">
+      {% for post in sortedPosts %}
+        {% set updatedAt = post | postLastUpdated(gitHistory) %}
+        {% set revisions = post | postRevisions(gitHistory) %}
+        <li class="post-list-item">
+          <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+          <p>{{ post | postSnippet(100) or "No excerpt yet." }}</p>
+          <p class="meta-inline">
+            Published {{ post.date | prettyDate }} |
+            Last updated {{ updatedAt | prettyDate }} |
+            {{ revisions }} revision{% if revisions != 1 %}s{% endif %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No living posts yet.</p>
+  {% endif %}
+</section>

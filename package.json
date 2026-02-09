@@ -1,0 +1,18 @@
+{
+  "name": "dkw-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Damn Kitty Works site built with Eleventy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damnkittyworks/dkw-site.git"
+  },
+  "scripts": {
+    "build": "node scripts/fetch-git-history.js && eleventy",
+    "start": "node scripts/fetch-git-history.js && eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "markdown-it": "^14.1.0"
+  }
+}
