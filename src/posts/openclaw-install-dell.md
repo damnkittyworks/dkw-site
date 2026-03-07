@@ -4,7 +4,7 @@ title: OpenClaw install on an old Dell laptop
 excerpt: First pass at getting OpenClaw running on a wiped Ubuntu Dell from a normie-can-do perspective.
 draft: false
 hideHistory: false
-permalink: false
+permalink: /posts/openclaw-install-dell/
 ---
 
 It’s Saturday, March 7, 2026, and I’m finally giving OpenClaw a try.
