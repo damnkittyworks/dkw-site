@@ -238,21 +238,22 @@ module.exports = function (eleventyConfig) {
     return match ? match.url : null;
   });
 
-  return {
-    dir: {
-      input: "src",
-      output: "_site",
-      includes: "_includes",
-      data: "_data",
-    },
-    markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    templateFormats: ["njk", "md", "html"],
-  };
-};
-eleventyConfig.addPairedShortcode("details", function(content, summary = "More detail") {
+eleventyConfig.addPairedShortcode("details", function (content, summary = "More detail") {
   return `<details class="step-detail">
-    <summary>${summary}</summary>
-    <div class="step-detail-content">${content}</div>
-  </details>`;
+<summary>${summary}</summary>
+<div class="step-detail-content">${content}</div>
+</details>`;
 });
+
+return {
+  dir: {
+    input: "src",
+    output: "_site",
+    includes: "_includes",
+    data: "_data",
+  },
+  markdownTemplateEngine: "njk",
+  htmlTemplateEngine: "njk",
+  templateFormats: ["njk", "md", "html"],
+};
+};
