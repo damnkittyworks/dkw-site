@@ -1,6 +1,12 @@
 const markdownIt = require("markdown-it");
 const path = require("path");
 
+const markdownLib = markdownIt({
+  html: true,
+  linkify: true,
+  typographer: false,
+});
+
 function normalizeInputPath(inputPathValue) {
   if (!inputPathValue || typeof inputPathValue !== "string") {
     return null;
@@ -71,7 +77,9 @@ function getHistoryEntry(postLike, gitHistory) {
     (postLike.inputPath ||
       (postLike.page && postLike.page.inputPath) ||
       (postLike.data && postLike.data.page && postLike.data.page.inputPath));
+
   const normalized = normalizeInputPath(inputPathValue);
+
   if (normalized && gitHistory.byFile && gitHistory.byFile[normalized]) {
     return gitHistory.byFile[normalized];
   }
@@ -88,23 +96,18 @@ function getUpdatedDate(postLike, gitHistory) {
   if (historyEntry && historyEntry.lastUpdated) {
     return historyEntry.lastUpdated;
   }
-
   if (postLike && postLike.data && postLike.data.lastUpdated) {
     return postLike.data.lastUpdated;
   }
-
   if (postLike && postLike.lastUpdated) {
     return postLike.lastUpdated;
   }
-
   if (postLike && postLike.date) {
     return postLike.date;
   }
-
   if (postLike && postLike.data && postLike.data.date) {
     return postLike.data.date;
   }
-
   return null;
 }
 
@@ -113,15 +116,12 @@ function getRevisionCount(postLike, gitHistory) {
   if (historyEntry && Number.isFinite(historyEntry.revisions)) {
     return Math.max(historyEntry.revisions, 1);
   }
-
   if (postLike && postLike.data && Number.isFinite(postLike.data.revisionCount)) {
     return Math.max(postLike.data.revisionCount, 1);
   }
-
   if (postLike && Number.isFinite(postLike.revisionCount)) {
     return Math.max(postLike.revisionCount, 1);
   }
-
   return 1;
 }
 
@@ -140,14 +140,19 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
-  eleventyConfig.setLibrary(
-    "md",
-    markdownIt({
-      html: false,
-      linkify: true,
-      typographer: false,
-    })
-  );
+  eleventyConfig.setLibrary("md", markdownLib);
+
+  eleventyConfig.addPairedShortcode("details", function (
+    content,
+    summary = "More detail"
+  ) {
+    return `<details class="step-detail">
+  <summary>${markdownLib.utils.escapeHtml(summary)}</summary>
+  <div class="step-detail-content">
+    ${markdownLib.render(content)}
+  </div>
+</details>`;
+  });
 
   eleventyConfig.addCollection("posts", (collectionApi) => {
     return collectionApi
@@ -245,3 +250,9 @@ module.exports = function (eleventyConfig) {
     templateFormats: ["njk", "md", "html"],
   };
 };
+eleventyConfig.addPairedShortcode("details", function(content, summary = "More detail") {
+  return `<details class="step-detail">
+    <summary>${summary}</summary>
+    <div class="step-detail-content">${content}</div>
+  </details>`;
+});
