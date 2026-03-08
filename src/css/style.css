@@ -462,3 +462,31 @@ pre {
     justify-content: space-between;
   }
 }
+.step-detail {
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+
+.step-detail summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.step-detail[open] summary {
+  margin-bottom: 0.4rem;
+}
+
+.step-detail-content {
+  padding: 0.1rem 0 0.1rem 1rem;
+  border-left: 2px solid var(--border);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.step-detail-content > *:first-child {
+  margin-top: 0;
+}
+
+.step-detail-content > *:last-child {
+  margin-bottom: 0;
+}
