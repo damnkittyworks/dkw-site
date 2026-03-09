@@ -2,7 +2,6 @@
 layout: base.njk
 ---
 {% set history = page | historyForPost(gitHistory) %}
-{% set displayedRevisionCount = page | postRevisions(gitHistory) %}
 {% set updatedAt = page | postLastUpdated(gitHistory) %}
 {% set timelineEntries = (history and history.commits) or [] %}
 {% set suppressHistoryMeta = draft or hideHistory %}
@@ -13,8 +12,7 @@ layout: base.njk
     {% if not suppressHistoryMeta %}
       <p class="meta-inline">
         Published {{ date | prettyDate }} |
-        Last updated {{ updatedAt | prettyDate }} |
-        {{ displayedRevisionCount }} revision{% if displayedRevisionCount != 1 %}s{% endif %}
+        Last updated {{ updatedAt | prettyDate }} 
       </p>
     {% endif %}
   </header>
