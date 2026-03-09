@@ -31,6 +31,7 @@ I asked ChatGPT to help me go through the OpenClaw documentation. I don’t have
 ## Sunday March 8, 2026
 
 First, I configured the guest network on my Wi-Fi. When ChatGPT suggested that, I was confused. Isn’t guest Wi-Fi just open and insecure? Turns out that’s not necessarily true on a home router. A guest network can actually be more secure because it isolates the OpenClaw laptop from the rest of my network. That made a lot of sense once I understood it.
+
 {% details "Nice read on guest Wi-Fi" %}
 The Dong Knows Tech website has a page about guest Wi-Fi if you'd like more info: <https://dongknows.com/guest-wi-fi-networking-and-iot-devices/>
 {% enddetails %}
@@ -38,6 +39,7 @@ The Dong Knows Tech website has a page about guest Wi-Fi if you'd like more info
 Next, I downloaded Ubuntu 24.04.4 LTS instead of the newer 25.10 release. The reasoning was simple: LTS versions usually need less maintenance. That matters because I really don’t want to be hands-on with updates on this laptop.
 
 I installed Ubuntu on the Dell laptop and selected the encryption option during setup.
+
 {% details "To encrypt or not?" %}
 Since this laptop is being dedicated to OpenClaw, wiping it and turning on encryption was an easy choice for me.
 
