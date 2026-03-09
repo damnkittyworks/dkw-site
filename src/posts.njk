@@ -18,14 +18,12 @@ description: Posts that evolve and improve over time.
     <ul class="post-list clean-list">
       {% for post in sortedPosts %}
         {% set updatedAt = post | postLastUpdated(gitHistory) %}
-        {% set revisions = post | postRevisions(gitHistory) %}
         <li class="post-list-item">
           <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
           <p>{{ post | postSnippet(100) or "No excerpt yet." }}</p>
           <p class="meta-inline">
             Published {{ post.date | prettyDate }} |
-            Last updated {{ updatedAt | prettyDate }} |
-            {{ revisions }} revision{% if revisions != 1 %}s{% endif %}
+            Last updated {{ updatedAt | prettyDate }}
           </p>
         </li>
       {% endfor %}
