@@ -463,13 +463,18 @@ pre {
   }
 }
 .step-detail {
-  margin: 0.2rem 0 1rem 0.75rem;
+  margin: 0 0 1rem 0.75rem;
 }
 
 .step-detail summary {
   cursor: pointer;
   color: var(--muted);
   font-size: 0.95rem;
+  margin: 0;
+}
+
+p + .step-detail {
+  margin-top: -0.35rem;
 }
 
 .step-detail[open] summary {
@@ -486,6 +491,7 @@ pre {
 .step-detail-content > *:first-child {
   margin-top: 0;
 }
+
 .step-detail-content > *:last-child {
   margin-bottom: 0;
 }
