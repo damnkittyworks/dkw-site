@@ -463,7 +463,9 @@ pre {
   }
 }
 .step-detail {
-  margin: 0 0 1rem 0.75rem;
+  margin: 0 !important;
+  outline: 3px solid red !important;
+  background: yellow !important;
 }
 
 .step-detail summary {
