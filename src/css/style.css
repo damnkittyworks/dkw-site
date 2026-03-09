@@ -463,7 +463,7 @@ pre {
   }
 }
 .step-detail {
-  margin: 0.5rem 0 1rem 1.5rem;
+  margin: 0.2rem 0 1rem 0.75rem;
 }
 
 .step-detail summary {
@@ -473,11 +473,11 @@ pre {
 }
 
 .step-detail[open] summary {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .step-detail-content {
-  padding: 0.1rem 0 0.1rem 1rem;
+  padding: 0.1rem 0 0.1rem 0.85rem;
   border-left: 2px solid var(--border);
   color: var(--muted);
   font-size: 0.95rem;
@@ -486,7 +486,6 @@ pre {
 .step-detail-content > *:first-child {
   margin-top: 0;
 }
-
 .step-detail-content > *:last-child {
   margin-bottom: 0;
 }
