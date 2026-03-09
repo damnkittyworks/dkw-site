@@ -238,12 +238,6 @@ module.exports = function (eleventyConfig) {
     return match ? match.url : null;
   });
 
-eleventyConfig.addPairedShortcode("details", function (content, summary = "More detail") {
-  return `<details class="step-detail">
-<summary>${summary}</summary>
-<div class="step-detail-content">${content}</div>
-</details>`;
-});
 
 return {
   dir: {
