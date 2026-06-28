@@ -1,15 +1,13 @@
 ---
 layout: base.njk
 ---
-{% set history = page | historyForPost(gitHistory) %}
-{% set updatedAt = page | postLastUpdated(gitHistory) %}
-{% set timelineEntries = (history and history.commits) or [] %}
-{% set suppressHistoryMeta = draft or hideHistory %}
+{% set updatedAt = updated or date %}
+{% set suppressPostMeta = draft or hideHistory %}
 
 <article class="post-entry">
   <header class="post-header card">
     <h1>{{ title }}</h1>
-    {% if not suppressHistoryMeta %}
+    {% if not suppressPostMeta %}
       <p class="meta-inline">
         Published {{ date | prettyDate }} |
         Last updated {{ updatedAt | prettyDate }} 
