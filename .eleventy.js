@@ -154,12 +154,16 @@ module.exports = function (eleventyConfig) {
 </details>`;
   });
 
-  eleventyConfig.addCollection("posts", (collectionApi) => {
-    return collectionApi
-      .getFilteredByGlob("src/posts/*.md")
-      .filter((item) => !(item.data && item.data.draft))
-      .sort((a, b) => b.date - a.date);
-  });
+eleventyConfig.addCollection("posts", (collectionApi) => {
+  return collectionApi
+    .getFilteredByGlob("src/posts/*.md")
+    .filter((item) => !(item.data && item.data.draft))
+    .sort((a, b) => {
+      const dateA = new Date(a.data.updated || a.date).getTime();
+      const dateB = new Date(b.data.updated || b.date).getTime();
+      return dateB - dateA;
+    });
+});
 
   eleventyConfig.addCollection("builds", (collectionApi) => {
     return collectionApi
