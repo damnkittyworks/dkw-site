@@ -2,10 +2,21 @@
 layout: post.njk
 title: OpenClaw install on an old Dell laptop
 excerpt: First pass at getting OpenClaw running on a wiped Ubuntu Dell from a normie-can-do perspective.
+date: 2026-03-07
+updated: 2026-06-28
 draft: false
 hideHistory: false
 permalink: /posts/openclaw-install-dell/
 ---
+
+{% details "What changed?" %}
+### June 28, 2026
+Added a status update: OpenClaw is installed, but I’m parking the experiment for now until I have a clearer use case.
+### March 8, 2026
+Documented the initial OpenClaw install.
+### March 7, 2026
+Created the post, defined the goal and setup, and logged the first-day context.
+{% enddetails %}
 
 It’s Saturday, March 7, 2026, and I’m finally giving OpenClaw a try.
 
@@ -116,15 +127,5 @@ Getting OpenClaw installed was one thing. Figuring out the first useful job to g
 
 ## Current status
 
-Task for the next few days:
-hatch the bot.
+OpenClaw is installed, but I’m putting this experiment aside for now. The installation was doable. The harder part was figuring out what I actually wanted to do with it. When I have some time, I'll brainstorm a few practical jobs I would actually want this machine to do.
 
-## Updates
-
-### March 8, 2026, 5:43 PM ET
-
-Documented the openclaw initial install.
-
-### March 7, 2026, 5:10 PM ET
-
-Created the post, defined the goal and setup, and logged the first-day context.
