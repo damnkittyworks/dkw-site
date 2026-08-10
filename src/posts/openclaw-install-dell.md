@@ -20,7 +20,7 @@ Created the post, defined the goal and setup, and logged the first-day context.
 
 It’s Saturday, March 7, 2026, and I’m finally giving OpenClaw a try.
 
-I’ve been reading about OpenClaw on X.com for a while, back when it was still called Clawdbot. There are two main things I want to use it for: research and fleshing out ideas, and having it operate a physical device.
+I’ve been reading about OpenClaw on [X.com](https://x.com/) for a while, back when it was still called Clawdbot. There are two main things I want to use it for: research and fleshing out ideas, and having it operate a physical device.
 
 On the research side, I have way too many things I want to work on and it feels like there’s never time. To be honest, I do have time. Procrastination just makes it feel like I don’t. So let’s see what happens if a lot of the research gets handled and my main job becomes evaluating and making decisions.
 
@@ -128,4 +128,3 @@ Getting OpenClaw installed was one thing. Figuring out the first useful job to g
 ## Current status
 
 OpenClaw is installed, but I’m putting this experiment aside for now. The installation was doable. The harder part was figuring out what I actually wanted to do with it. When I have some time, I'll brainstorm a few practical jobs I would actually want this machine to do.
-
